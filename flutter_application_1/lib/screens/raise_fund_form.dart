@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RaiseFundForm extends StatefulWidget {
-<<<<<<< HEAD
-  
-=======
   const RaiseFundForm({super.key});
 
->>>>>>> 4cd8a3a (emergency screen, firebase and ai services done draft 1)
   @override
   _RaiseFundFormState createState() => _RaiseFundFormState();
 }

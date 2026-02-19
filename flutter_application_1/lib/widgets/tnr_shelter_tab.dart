@@ -23,7 +23,8 @@ class TNRShelterTab extends StatelessWidget {
     },
   ];
 
-  const TNRShelterTab({super.key});
+  // FIXED: Removed 'const' here
+  TNRShelterTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +38,12 @@ class TNRShelterTab extends StatelessWidget {
             gradient: const LinearGradient(colors: [Color(0xFFE8F5E9), Color(0xFFC8E6C9)]),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: const Column(
+          // FIXED: Removed 'const' from this Column
+          child: Column(
             children: [
-              Text('147', style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32))),
-              SizedBox(height: 8),
-              Text(
+              const Text('147', style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32))),
+              const SizedBox(height: 8),
+              const Text(
                 'Animals helped through TNR in\nPetaling Jaya this month',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 14, color: Color(0xFF558B2F)),

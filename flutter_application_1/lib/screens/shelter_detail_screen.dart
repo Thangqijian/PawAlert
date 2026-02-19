@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 class ShelterDetailScreen extends StatefulWidget {
   final Map<String, dynamic> shelterData;
 
-<<<<<<< HEAD
-  const ShelterDetailScreen({required this.shelterData});
-=======
   const ShelterDetailScreen({super.key, required this.shelterData});
->>>>>>> 4cd8a3a (emergency screen, firebase and ai services done draft 1)
 
   @override
   _ShelterDetailScreenState createState() => _ShelterDetailScreenState();

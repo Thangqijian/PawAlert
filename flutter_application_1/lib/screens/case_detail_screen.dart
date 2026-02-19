@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 class CaseDetailScreen extends StatefulWidget {
   final Map<String, dynamic> caseData;
 
-<<<<<<< HEAD
-  const CaseDetailScreen({required this.caseData});
-=======
   const CaseDetailScreen({super.key, required this.caseData});
->>>>>>> 4cd8a3a (emergency screen, firebase and ai services done draft 1)
 
   @override
   _CaseDetailScreenState createState() => _CaseDetailScreenState();

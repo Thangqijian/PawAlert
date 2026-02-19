@@ -19,7 +19,7 @@ class _ReportEmergencyFormState extends State<ReportEmergencyForm> {
   
   // Form fields
   String _status = 'moderate'; 
-  String _location = 'GPS Location';
+  final String _location = 'GPS Location';
   Uint8List? _imageBytes; 
   
   bool _isAnalyzing = false;

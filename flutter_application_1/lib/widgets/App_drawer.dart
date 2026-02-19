@@ -10,17 +10,14 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-
   @override
   Widget build(BuildContext context) {
-
     int notificationCount = AdoptionData.notifications.length;
 
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-
           const DrawerHeader(
             decoration: BoxDecoration(
               color: Color(0xFFFF6B6B),
@@ -53,19 +50,16 @@ class _AppDrawerState extends State<AppDrawer> {
           ListTile(
             leading: const Icon(Icons.notifications),
             title: const Text('Notifications'),
-
             trailing: notificationCount > 0
                 ? CircleAvatar(
                     radius: 12,
                     backgroundColor: Colors.red,
                     child: Text(
                       notificationCount.toString(),
-                      style: const TextStyle(
-                          color: Colors.white, fontSize: 12),
+                      style: const TextStyle(color: Colors.white, fontSize: 12),
                     ),
                   )
                 : null,
-
             onTap: () {
               Navigator.push(
                 context,
@@ -78,11 +72,10 @@ class _AppDrawerState extends State<AppDrawer> {
             },
           ),
           ListTile(
-              leading: Text('⚙️', style: TextStyle(fontSize: 20)),
-              title: Text('Settings'),
-              onTap: () {},
-            ),
-
+            leading: Text('⚙️', style: TextStyle(fontSize: 20)),
+            title: Text('Settings'),
+            onTap: () {},
+          ),
         ],
       ),
     );

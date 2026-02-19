@@ -6,7 +6,7 @@ import 'screens/emergency_screen.dart';
 import 'screens/Adoption/Adoption_HomePage.dart';
 import 'screens/chat_list_screen.dart';
 import 'screens/LostnFound/LostnFound_page.dart';
-import 'widgets/App_drawer.dart';
+import 'widgets/app_drawer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,18 +47,21 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
-  // Combining the real screens with the emergency logic
+  // FIXED: Added ChatListScreen to match the 5 navigation items
   final List<Widget> _screens = [
     EmergencyScreen(),
     DonationScreen(),
     const AdoptionScreen(),
     const LostHomePage(),
-    const ChatListScreen(),
+    const ChatListScreen(), 
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      endDrawer: const AppDrawer(),
+      
       body: IndexedStack(
         index: _currentIndex,
         children: _screens,
@@ -135,14 +138,10 @@ class PlaceholderScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Text(
               '$title Feature',
-              style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.grey),
             ),
             const SizedBox(height: 10),
-            const Text('(Coming Soon)',
-                style: TextStyle(fontSize: 16, color: Colors.grey)),
+            const Text('(Coming Soon)', style: TextStyle(fontSize: 16, color: Colors.grey)),
           ],
         ),
       ),

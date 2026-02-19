@@ -3,12 +3,8 @@ import '../widgets/individual_case_tab.dart';
 import '../widgets/tnr_shelter_tab.dart';
 
 class DonationScreen extends StatelessWidget {
-<<<<<<< HEAD
-  
-=======
   const DonationScreen({super.key});
 
->>>>>>> 4cd8a3a (emergency screen, firebase and ai services done draft 1)
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -19,7 +15,8 @@ class DonationScreen extends StatelessWidget {
           title: const Row(
             children: [
               Text('💰 ', style: TextStyle(fontSize: 24)),
-              Text('Donations', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+              Text('Donations', 
+                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
             ],
           ),
           bottom: const TabBar(
@@ -34,7 +31,8 @@ class DonationScreen extends StatelessWidget {
             ],
           ),
         ),
-        body: const TabBarView(
+        // TabBarView is not 'const' because its children (Tabs) load live data
+        body: TabBarView(
           children: [
             IndividualCaseTab(),
             TNRShelterTab(),

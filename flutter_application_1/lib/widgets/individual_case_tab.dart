@@ -24,7 +24,8 @@ class IndividualCaseTab extends StatelessWidget {
     },
   ];
 
-  const IndividualCaseTab({super.key});
+  // FIXED: Removed 'const' to allow the 'cases' list above
+  IndividualCaseTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +58,7 @@ class IndividualCaseTab extends StatelessWidget {
             itemCount: cases.length,
             itemBuilder: (context, index) {
               final caseData = cases[index];
+              // FIXED: We are calculating this...
               final progress = (caseData['raised'] / caseData['goal']) * 100;
 
               return GestureDetector(
@@ -94,6 +96,9 @@ class IndividualCaseTab extends StatelessWidget {
                             const SizedBox(height: 8),
                             Text(caseData['description'], style: TextStyle(fontSize: 14, color: Colors.grey[700])),
                             const SizedBox(height: 12),
+                            // FIXED: Added this Text to use the 'progress' variable and fix the warning
+                            Text('${progress.toStringAsFixed(0)}% Funded', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.green[700])),
+                            const SizedBox(height: 4),
                             LinearProgressIndicator(
                               value: caseData['raised'] / caseData['goal'],
                               backgroundColor: Colors.grey[300],

@@ -24,7 +24,7 @@ class EmergencyDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // --- HEADER: Real Animal Photo ---
-            Container(
+            SizedBox(
               height: 250,
               width: double.infinity,
               child: Stack(
