@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'screens/donation_screen.dart';
+import 'screens/Adoption/Adoption_HomePage.dart';
+import 'widgets/app_drawer.dart';
 
 void main() {
   runApp(PawGuardApp());
 }
 
 class PawGuardApp extends StatelessWidget {
+  const PawGuardApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,6 +29,7 @@ class PawGuardApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -35,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
     SimpleHomeContent(),
     DonationScreen(),
-    PlaceholderScreen(title: 'Adoption'),
+    AdoptionScreen(),
     PlaceholderScreen(title: 'Lost & Found'),
   ];
 
@@ -79,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class SimpleHomeContent extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,64 +107,7 @@ class SimpleHomeContent extends StatelessWidget {
           ),
         ],
       ),
-      endDrawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color(0xFFFF6B6B),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Menu',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ListTile(
-              leading: Text('👤', style: TextStyle(fontSize: 20)),
-              title: Text('My Profile'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Text('📝', style: TextStyle(fontSize: 20)),
-              title: Text('My Posts'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Text('💰', style: TextStyle(fontSize: 20)),
-              title: Text('My Donations'),
-              onTap: () {},
-            ),
-            Divider(),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Text(
-                'APP SETTINGS',
-                style: TextStyle(fontSize: 12, color: Colors.grey, fontWeight: FontWeight.bold),
-              ),
-            ),
-            ListTile(
-              leading: Text('🔔', style: TextStyle(fontSize: 20)),
-              title: Text('Notifications'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Text('⚙️', style: TextStyle(fontSize: 20)),
-              title: Text('Settings'),
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
+      endDrawer: const AppDrawer(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -186,7 +135,7 @@ class SimpleHomeContent extends StatelessWidget {
 class PlaceholderScreen extends StatelessWidget {
   final String title;
 
-  PlaceholderScreen({required this.title});
+  const PlaceholderScreen({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {

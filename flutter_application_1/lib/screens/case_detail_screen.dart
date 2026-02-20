@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class CaseDetailScreen extends StatefulWidget {
   final Map<String, dynamic> caseData;
 
-  CaseDetailScreen({required this.caseData});
+  const CaseDetailScreen({required this.caseData});
 
   @override
   _CaseDetailScreenState createState() => _CaseDetailScreenState();
-}
+} 
 
 class _CaseDetailScreenState extends State<CaseDetailScreen> {
   final TextEditingController _amountController = TextEditingController();

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ShelterDetailScreen extends StatefulWidget {
   final Map<String, dynamic> shelterData;
 
-  ShelterDetailScreen({required this.shelterData});
+  const ShelterDetailScreen({required this.shelterData});
 
   @override
   _ShelterDetailScreenState createState() => _ShelterDetailScreenState();

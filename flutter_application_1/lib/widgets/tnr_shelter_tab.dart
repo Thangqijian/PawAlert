@@ -47,7 +47,7 @@ class TNRShelterTab extends StatelessWidget {
             ],
           ),
         ),
-        ...shelters.map((shelter) => _buildShelterCard(context, shelter)).toList(),
+        ...shelters.map((shelter) => _buildShelterCard(context, shelter)),
       ],
     );
   }
