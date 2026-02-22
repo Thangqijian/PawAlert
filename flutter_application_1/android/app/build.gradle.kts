@@ -22,8 +22,8 @@ val flutterVersionName = localProperties.getProperty("flutter.versionName") ?: "
 android {
     // Ensure this matches your package name from Step 2
     namespace = "com.example.flutter_application_1"
-    compileSdk = 34
-    ndkVersion = "25.1.8937393"
+    compileSdk = 36
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -36,8 +36,8 @@ android {
 
     defaultConfig {
         applicationId = "com.example.flutter_application_1"
-        minSdk = 21
-        targetSdk = 34
+        minSdk = flutter.minSdkVersion
+        targetSdk = 36
         versionCode = flutterVersionCode.toInt()
         versionName = flutterVersionName
         multiDexEnabled = true
