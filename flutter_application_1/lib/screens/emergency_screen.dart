@@ -15,7 +15,6 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
   final FirebaseService _firebaseService = FirebaseService();
 
   int _viewMode = 0; // 0 = feed, 1 = grid
-  String _sortBy = 'urgency';
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +39,11 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
       ),
       body: Column(
         children: [
-          _buildSortHeader(),
+          // Sort header removed to keep UI clean and forced to urgency
           Expanded(
             child: StreamBuilder<List<Map<String, dynamic>>>(
-              stream: _sortBy == 'urgency'
-                  ? _firebaseService.getCasesByUrgency()
-                  : _firebaseService.getEmergencyCases(),
+              // Always sort by urgency level (Critical > Urgent > Moderate)
+              stream: _firebaseService.getCasesByUrgency(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
@@ -85,29 +83,6 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
   }
 
   // --- UI HELPER METHODS ---
-
-  Widget _buildSortHeader() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          const Text("Sort by:", style: TextStyle(fontWeight: FontWeight.bold)),
-          const SizedBox(width: 10),
-          ChoiceChip(
-            label: const Text("Priority"),
-            selected: _sortBy == 'urgency',
-            onSelected: (val) => setState(() => _sortBy = 'urgency'),
-          ),
-          const SizedBox(width: 8),
-          ChoiceChip(
-            label: const Text("Recent"),
-            selected: _sortBy == 'time',
-            onSelected: (val) => setState(() => _sortBy = 'time'),
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget _buildFeedView(List<Map<String, dynamic>> cases) {
     return ListView.builder(
