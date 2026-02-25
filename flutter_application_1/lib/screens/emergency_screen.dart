@@ -114,11 +114,25 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(data['description'] ?? '',
-                maxLines: 2, overflow: TextOverflow.ellipsis),
+            // Show the State and City
+            Row(
+              children: [
+                const Icon(Icons.location_on,
+                    size: 14, color: Color(0xFFFF6B6B)),
+                const SizedBox(width: 4),
+                Text("${data['location']}, ${data['state']}",
+                    style: const TextStyle(
+                        fontSize: 12, fontWeight: FontWeight.bold)),
+              ],
+            ),
             const SizedBox(height: 5),
-            Text(data['timeAgo'] ?? 'Just now',
-                style: const TextStyle(fontSize: 12, color: Colors.grey)),
+            Text(data['description'] ?? '',
+                maxLines: 1, overflow: TextOverflow.ellipsis),
+            const SizedBox(height: 5),
+            // Show how many things they need help with
+            Text(
+                "${(data['helpNeeded'] as List?)?.length ?? 0} items requested",
+                style: const TextStyle(fontSize: 11, color: Colors.blueGrey)),
           ],
         ),
         onTap: () => Navigator.push(
