@@ -172,8 +172,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     chat["ownerName"],
@@ -185,8 +184,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                                   ),
                                   if (lastMsg != null)
                                     Text(
-                                      _formatTime(
-                                          lastMsg["time"] as DateTime),
+                                      _formatTime(lastMsg["time"] as DateTime),
                                       style: TextStyle(
                                           fontSize: 11,
                                           color: Colors.grey[400]),
@@ -199,8 +197,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 2),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFFF6B6B)
-                                      .withOpacity(0.1),
+                                  color: const Color(0xFFFF6B6B).withOpacity(0.1),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
@@ -229,6 +226,26 @@ class _ChatListScreenState extends State<ChatListScreen> {
                           ),
                         ),
                         const SizedBox(width: 8),
+                        
+                        // FIXED: Using the unreadCount here!
+                        if (unreadCount > 0)
+                          Container(
+                            padding: const EdgeInsets.all(6),
+                            margin: const EdgeInsets.only(right: 4),
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFFF6B6B),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Text(
+                              '$unreadCount',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+
                         const Icon(Icons.chevron_right,
                             color: Colors.grey, size: 20),
                       ],
