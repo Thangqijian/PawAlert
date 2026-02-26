@@ -1,45 +1,82 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
-
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# ----------------------------------------------------------------------------
+# Flutter / Dart official + community recommended ignores
+# https://github.com/github/gitignore/blob/main/Flutter.gitignore
+# https://github.com/github/gitignore/blob/main/Dart.gitignore
+# ----------------------------------------------------------------------------
 
 # Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
 .dart_tool/
+.packages
+.flutter-plugins
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-/build/
-/coverage/
+build/
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/Runner/GeneratedPluginRegistrant.*
 
-# Symbolication related
-app.*.symbols
+# Android
+android/.gradle/
+android/local.properties
+android/gradlew
+android/gradlew.bat
+android/key.properties               # ← very important if you add signing later
 
-# Obfuscation related
-app.*.map.json
+# Generated files
+**/doc/api/
+**/ios/Flutter/.last_build_id
+**/coverage/
+**/app.*.symbols
+**/app.*.map.json
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# IDE / editor files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+!.vscode/extensions.json             # keep if you want shared extensions
+*.sublime-*
+
+# macOS / Windows junk
+.DS_Store
+Thumbs.db
+ehthumbs.db
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+
+# Misc
+.mise.toml                           # if using mise / asdf
+.fvm/                                # if using fvm
+.dart_tool/package_config.json       # sometimes people ignore this too
+
+# ────────────────────────────────────────────────────────────────────────────
+#   SECRETS & ENVIRONMENT FILES – NEVER COMMIT THESE
+# ────────────────────────────────────────────────────────────────────────────
+
+# API keys, secrets, credentials
+*.key
+*.pem
+*.jks
+*.keystore
+google-services.json                 # Firebase
+GoogleService-Info.plist             # Firebase iOS
+.env
+dotenv.env
+.env.*
+!.env.example                        # ← template only (keep this one)
+secrets.dart
+keys.dart
+lib/config/secrets.dart
+lib/config/api_keys.dart
+lib/services/ai_service.dart         # ← temporary – remove this line AFTER you move the key out!
+
+# Local config / testing
+test/.env
+integration_test/.env

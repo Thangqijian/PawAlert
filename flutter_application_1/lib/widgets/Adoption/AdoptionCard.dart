@@ -12,6 +12,16 @@ class AdoptionCard extends StatelessWidget {
     required this.onFavourite,
   });
 
+  String _getAnimalEmoji(String? type) {
+    switch (type) {
+      case "Cat":   return "🐈";
+      case "Dog":   return "🐕";
+      case "Bird":  return "🦜";
+      case "Rabbit":return "🐇";
+      default:      return "🐾";
+    }
+  }
+
   Color get statusColor {
     switch (animal["status"]) {
       case "Homeless":
@@ -61,17 +71,22 @@ class AdoptionCard extends StatelessWidget {
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(
-                      height: 200,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      height: 200,                    // ← keep this
+                      width: double.infinity,
                       color: Colors.grey[200],
+                      alignment: Alignment.center,    // ← better centering
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            animal["animalType"] == "Cat" ? "🐈" :
-                            animal["animalType"] == "Dog" ? "🐕" :
-                            animal["animalType"] == "Bird" ? "🦜" : "🐾",
-                            style: const TextStyle(fontSize: 60),
+                            _getAnimalEmoji(animal["animalType"]),
+                            style: const TextStyle(fontSize: 70),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            "Image not found",
+                            style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                           ),
                         ],
                       ),

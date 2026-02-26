@@ -7,12 +7,27 @@ import 'screens/Adoption/Adoption_HomePage.dart';
 import 'screens/chat_list_screen.dart';
 import 'screens/LostnFound/LostnFound_page.dart';
 import 'widgets/app_drawer.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  try {
+    print("Attempting to load dotenv.env ...");
+    await dotenv.load(fileName: "dotenv.env");   // ← keep this
+    print("✅ .env loaded successfully");
+  } catch (e, stack) {
+    print("❌ Failed to load .env: $e");
+    print("Stack: $stack");
+    // Optionally: you can continue anyway with fallback
+    // or rethrow if you want crash
+  }
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(const PawGuardApp());
 }
 

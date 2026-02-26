@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 
 class AIService {
   // Using your provided API Key
-  static const String _apiKey = 'AIzaSyCojgSUxVNbT8NOnyw0is1rlIvZ0xoi1oA';
+  static String get _apiKey => dotenv.env['GEMINI_API_KEY'] ?? '';
   late final GenerativeModel _model;
 
   AIService() {
