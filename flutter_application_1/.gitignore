@@ -75,7 +75,6 @@ secrets.dart
 keys.dart
 lib/config/secrets.dart
 lib/config/api_keys.dart
-lib/services/ai_service.dart         # ← temporary – remove this line AFTER you move the key out!
 
 # Local config / testing
 test/.env

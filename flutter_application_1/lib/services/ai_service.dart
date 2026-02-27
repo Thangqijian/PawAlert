@@ -3,15 +3,25 @@ import 'dart:typed_data';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-
 class AIService {
-  // Using your provided API Key
+  // Access the key from the environment file
   static String get _apiKey => dotenv.env['GEMINI_API_KEY'] ?? '';
-  late final GenerativeModel _model;
 
-  AIService() {
+  // Changed to nullable and removed 'late final' to prevent premature initialization
+  GenerativeModel? _model;
+
+  // Private helper to ensure the model is initialized only when needed
+  GenerativeModel _getModel() {
+    if (_model != null) return _model!;
+
+    if (_apiKey.isEmpty) {
+      // Provides a clear error in the terminal if the env file didn't load
+      throw Exception(
+          "GEMINI_API_KEY not found. Ensure dotenv.load() is called in main.dart.");
+    }
+
     _model = GenerativeModel(
-      model: 'gemini-1.5-flash', // FIXED: Corrected model name
+      model: 'gemini-1.5-flash',
       apiKey: _apiKey,
       generationConfig: GenerationConfig(
         temperature: 0.4,
@@ -20,11 +30,16 @@ class AIService {
         maxOutputTokens: 512,
       ),
     );
+    return _model!;
   }
 
   /// Analyzes the photo + text, ranks urgency, and checks for fraud.
-  Future<Map<String, dynamic>> analyzeUrgency(Uint8List imageBytes, String description) async {
+  Future<Map<String, dynamic>> analyzeUrgency(
+      Uint8List imageBytes, String description) async {
     try {
+      // Get the lazy-loaded model
+      final model = _getModel();
+
       final prompt = """
         You are an expert veterinary triage assistant. Analyze this photo and description: "$description"
         
@@ -45,7 +60,7 @@ class AIService {
         ])
       ];
 
-      final response = await _model.generateContent(content);
+      final response = await model.generateContent(content);
       final responseText = response.text ?? "moderate | legitimate";
       final parts = responseText.split('|');
 
@@ -70,8 +85,11 @@ class AIService {
   }
 
   /// Generate 3 safety tips based on the AI rank
-  Future<List<String>> generateSafetyTips(String urgency, String description) async {
+  Future<List<String>> generateSafetyTips(
+      String urgency, String description) async {
     try {
+      final model = _getModel();
+
       final prompt = '''
         You are an animal rescue expert. Generate 3 short, actionable safety tips for someone helping with this $urgency animal emergency:
         Situation: $description
@@ -82,7 +100,7 @@ class AIService {
       ''';
 
       final content = [Content.text(prompt)];
-      final response = await _model.generateContent(content);
+      final response = await model.generateContent(content);
       final result = response.text ?? '';
 
       final tips = <String>[];
@@ -92,7 +110,9 @@ class AIService {
           tips.add(line.replaceFirst(RegExp(r'[0-9]\.\s*'), '').trim());
         }
       }
-      return tips.isNotEmpty ? tips.take(3).toList() : _fallbackSafetyTips(urgency);
+      return tips.isNotEmpty
+          ? tips.take(3).toList()
+          : _fallbackSafetyTips(urgency);
     } catch (e) {
       print('AI Safety Tips Error: $e');
       return _fallbackSafetyTips(urgency);
